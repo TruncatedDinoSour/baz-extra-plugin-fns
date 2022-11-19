@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+local start ret
+start="$(date +%s%N)"
+
+baz_load_plugins "$BAZ_LOAD_DIR"/*
+ret="$?"
+
+baz_load_log "Loading all plugins took ~$(($(("$(date +%s%N)" - start)) / 1000000)) ms (this is quite inaccurate)" >&2
+
+return "$ret"

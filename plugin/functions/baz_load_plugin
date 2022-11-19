@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+baz_load_plugdir_empty &&
+    baz_load_log 'No plugin dir found' &&
+    return 1
+
+[ ! "$1" ] && baz_load_log 'No plugin specified' 2>&1 && return 1
+
+local baz_plugin="$1" baz_plugin_name start
+
+[ -d "$1" ] || baz_plugin="$BAZ_LOAD_DIR/$1"
+baz_load_get_base baz_plugin_name "$baz_plugin"
+
+[ "$BAZ_NO_DISABLED" ] &&
+    [ -e "$baz_plugin/disabled" ] &&
+    baz_load_log "'$baz_plugin_name' is disabled -- skipping" &&
+    return
+
+[ ! -f "$baz_plugin/baz.env" ] &&
+    baz_load_log "Plugin '$baz_plugin_name' is invalid or is not installed" >&2 &&
+    return 2
+
+start="$(date +%s%N)"
+
+baz_load_plugin_low "$baz_plugin"
+
+baz_load_log "Loading '$baz_plugin_name' took $(($(("$(date +%s%N)" - start)) / 1000000)) ms" >&2

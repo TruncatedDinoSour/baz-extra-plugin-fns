@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+[ "$#" -le 0 ] &&
+    baz_load_log 'No plugins to load specified' >&2 &&
+    return 1
+
+local plugin ret=0
+
+for plugin in "$@"; do
+    baz_load_plugin "$plugin" || ret="$((ret + 1))"
+done
+
+return "$ret"

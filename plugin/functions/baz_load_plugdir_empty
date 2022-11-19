@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+[ ! -d "$BAZ_LOAD_DIR" ] || [ -z "$(ls -A "$BAZ_LOAD_DIR" --  2>/dev/null)" ]

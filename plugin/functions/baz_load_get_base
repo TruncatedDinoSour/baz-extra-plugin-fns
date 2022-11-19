@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+local -n _r="$1"
+shift 1
+
+set -- "${1%"${1##*[!/]}"}"
+printf -v _r %s "${1##*/}"
