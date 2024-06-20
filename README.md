@@ -1,3 +1,4 @@
+# This repository has been migrated to the self-hosted ari-web Forgejo instance: <https://git.ari.lt/ari/baz-extra-plugin-fns>
 # Baz plugin: baz-extra-plugin-fns
 
 > Baz plugin for extra high-level plugin loader functions removed in baz v5.4.0
